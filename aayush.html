@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Vibes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Navbar styling */
+        nav {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f39c12;
+        }
+
+        /* Section styling */
+        section {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        section:nth-child(odd) {
+            background: #f4f4f4;
+        }
+
+        section:nth-child(even) {
+            background: #e2e2e2;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                display: none;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+            }
+
+            .menu-toggle span {
+                background: #fff;
+                display: block;
+                height: 3px;
+                width: 25px;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Music Vibes</div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li><a href="#section1">Genres</a></li>
+            <li><a href="#section2">Artists</a></li>
+        </ul>
+    </nav>
+
+    <section id="section1">
+        <h2>Discover Music Genres</h2>
+        <p>Explore a world of music genres, from classical symphonies to electronic beats. Each genre tells a unique story and evokes emotions that resonate with listeners worldwide.</p>
+    </section>
+
+    <section id="section2">
+        <h2>Famous Artists</h2>
+        <p>Meet the legendary artists who have shaped the music industry. Their creativity and passion continue to inspire fans and fellow musicians alike.</p>
+    </section>
+
+    <script>
+        const navMenu = document.querySelector('nav ul');
+        const menuToggle = document.querySelector('.menu-toggle');
+
+        function toggleMenu() {
+            navMenu.classList.toggle('active');
+        }
+
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(e.target.getAttribute('href'));
+                window.scrollTo({
+                    top: target.offsetTop - navMenu.offsetHeight,
+                    behavior: 'smooth',
+                });
+            });
+        });
+    </script>
+</body>
+</html>
