@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard App</title>
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input {
+            margin-right: 10px;
+        }
+
+        #flashcard-list {
+            margin-top: 20px;
+        }
+
+        #study-area {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            nav ul li {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#create">Create Flashcards</a></li>
+            <li><a href="#study">Study Flashcards</a></li>
+        </ul>
+    </nav>
+
+    <section id="create">
+        <h1>Create Flashcards</h1>
+        <form id="flashcard-form">
+            <input type="text" id="question" placeholder="Question" required>
+            <input type="text" id="answer" placeholder="Answer" required>
+            <button type="submit">Add Flashcard</button>
+        </form>
+        <div id="flashcard-list"></div>
+    </section>
+
+    <section id="study">
+        <h1>Study Flashcards</h1>
+        <button id="start-study">Start Studying</button>
+        <div id="study-area"></div>
+    </section>
+
+    <script>
+        // script.js
+        document.getElementById('flashcard-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const question = document.getElementById('question').value;
+            const answer = document.getElementById('answer').value;
+
+            const flashcardList = document.getElementById('flashcard-list');
+            const flashcardDiv = document.createElement('div');
+            flashcardDiv.innerHTML = `<strong>Q:</strong> ${question} <strong>A:</strong> ${answer}`;
+            flashcardList.appendChild(flashcardDiv);
+
+            document.getElementById('question').value = '';
+            document.getElementById('answer').value = '';
+        });
+
+        document.getElementById('start-study').addEventListener('click', function() {
+            const flashcards = document.querySelectorAll('#flashcard-list div');
+            const studyArea = document.getElementById('study-area');
+            studyArea.innerHTML = '';
+
+            flashcards.forEach((flashcard, index) => {
+                const studyCard = document.createElement('div');
+                studyCard.innerHTML = `<p>${flashcard.innerHTML}</p>`;
+                studyArea.appendChild(studyCard);
+            });
+        });
+    </script>
+</body>
+</html>
